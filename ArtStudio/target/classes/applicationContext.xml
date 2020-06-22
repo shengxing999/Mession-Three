@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 加载配置文件 -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <context:component-scan base-package="com.artstudio.service"/>
+
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${driver}"/>
+        <property name="jdbcUrl" value="${url}"/>
+        <property name="user" value="${username}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+    <!-- 配置sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 配置分页插件 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>
+                            <!-- 你使用的数据库类型 -->
+                            dialect=mysql
+                            reasonable=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+    <!-- 扫描Mapper接口实现代理类，接口id名默认为接口名，首字母小写 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.artstudio.dao.mapper"/>
+    </bean>
+
+    <bean id="user" class="com.artstudio.dao.pojo.User"/>
+    <bean id="art" class="com.artstudio.dao.pojo.Art"/>
+    <bean id="artType" class="com.artstudio.dao.pojo.ArtType"/>
+    <bean id="banner" class="com.artstudio.dao.pojo.Banner"/>
+    <bean id="message" class="com.artstudio.dao.pojo.Message"/>
+    <bean id="module" class="com.artstudio.dao.pojo.Module"/>
+    <bean id="role" class="com.artstudio.dao.pojo.Role"/>
+    <bean id="roleModule" class="com.artstudio.dao.pojo.RoleModule"/>
+    <bean id="studioDetails" class="com.artstudio.dao.pojo.StudioDetails" />
+
+    <!-- 配置@Service注解 -->
+    <bean id="userService" class="com.artstudio.service.impl.UserServiceImpl"/>
+    <bean id="artService" class="com.artstudio.service.impl.ArtServiceImpl"/>
+    <bean id="artTypeService" class="com.artstudio.service.impl.ArtTypeServiceImpl"/>
+    <bean id="bannerService" class="com.artstudio.service.impl.BannerServiceImpl"/>
+    <bean id="messageService" class="com.artstudio.service.impl.MessageServiceImpl"/>
+    <bean id="moduleService" class="com.artstudio.service.impl.ModuleServiceImpl"/>
+    <bean id="roleService" class="com.artstudio.service.impl.RoleServiceImpl"/>
+    <bean id="roleModuleService" class="com.artstudio.service.impl.RoleModuleServiceImpl"/>
+    <bean id="studioDetailsService" class="com.artstudio.service.impl.StudioDetailsServiceImpl"/>
+</beans>

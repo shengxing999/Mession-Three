@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <!-- 批量别名，指定包名，MyBatis自动扫描POJO类，别名就是类名（首字母大小写均可） -->
+        <package name="com.artstudio.dao.pojo" />
+    </typeAliases>
+    <!--mybatis.xml里注册UserMapper.xml文件-->
+    <mappers>
+<!--        <mapper resource="com/artstudio/dao/mapper/UserMapper.xml"/>-->
+<!--        <mapper resource="com/artstudio/dao/mapper/ArtMapper.xml"/>-->
+        <package name="com.artstudio.dao.mapper" />
+    </mappers>
+
+</configuration>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.artstudio.dao.mapper.ArtMapper">
+  <resultMap id="BaseResultMap" type="com.artstudio.dao.pojo.Art">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="type_id" jdbcType="BIGINT" property="typeId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="thumbnail_pic" jdbcType="VARCHAR" property="thumbnailPic" />
+    <result column="video" jdbcType="VARCHAR" property="video" />
+    <result column="detials_pic" jdbcType="VARCHAR" property="detialsPic" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="create_at" jdbcType="BIGINT" property="createAt" />
+    <result column="create_by" jdbcType="BIGINT" property="createBy" />
+    <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+    <result column="update_by" jdbcType="BIGINT" property="updateBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type_id, `name`, thumbnail_pic, video, detials_pic, introduction, create_at, create_by,
+    update_at, update_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from art
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from art
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.artstudio.dao.pojo.Art">
+    insert into art (id, type_id, name, 
+      thumbnail_pic, video, detials_pic, 
+      introduction, create_at, create_by, 
+      update_at, update_by)
+    values (#{id,jdbcType=BIGINT}, #{typeId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{thumbnailPic,jdbcType=VARCHAR}, #{video,jdbcType=VARCHAR}, #{detialsPic,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=VARCHAR}, #{createAt,jdbcType=BIGINT}, #{createBy,jdbcType=BIGINT}, 
+      #{updateAt,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.artstudio.dao.pojo.Art">
+    insert into art
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="thumbnailPic != null">
+        thumbnail_pic,
+      </if>
+      <if test="video != null">
+        video,
+      </if>
+      <if test="detialsPic != null">
+        detials_pic,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateAt != null">
+        update_at,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailPic != null">
+        #{thumbnailPic,jdbcType=VARCHAR},
+      </if>
+      <if test="video != null">
+        #{video,jdbcType=VARCHAR},
+      </if>
+      <if test="detialsPic != null">
+        #{detialsPic,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.artstudio.dao.pojo.Art">
+    update art
+    <set>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailPic != null">
+        thumbnail_pic = #{thumbnailPic,jdbcType=VARCHAR},
+      </if>
+      <if test="video != null">
+        video = #{video,jdbcType=VARCHAR},
+      </if>
+      <if test="detialsPic != null">
+        detials_pic = #{detialsPic,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        update_at = #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.artstudio.dao.pojo.Art">
+    update art
+    set type_id = #{typeId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      thumbnail_pic = #{thumbnailPic,jdbcType=VARCHAR},
+      video = #{video,jdbcType=VARCHAR},
+      detials_pic = #{detialsPic,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findAll" parameterType="Art" resultType="Art" resultMap="BaseResultMap">
+    select *
+    from art
+  </select>
+</mapper>
